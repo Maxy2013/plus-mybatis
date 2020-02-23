@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<mapper namespace="com.plus.mybatis.perfect.mapper.UserMapper">
+    <insert id = "insertUser" parameterType = "com.plus.mybatis.perfect.model.User">
+        insert into user values('1', 5)
+    </insert>
+
+    <delete id = "delete">
+        delete from user
+    </delete>
+
+    <update id = "update">
+        update user
+    </update>
+
+    <select id = "selectUser" parameterType = "com.plus.mybatis.perfect.model.User"
+                      resultType = "com.plus.mybatis.perfect.model.User">
+        select * from user where host = #{host, jdbcType=VARCHAR}
+    </select>
+
+    <resultMap id = "userResultMap">
+        <result property = "host" column = "host"/>
+        <result property = "user" column = "user"/>
+        <result property = "password" column = "pass_word"/>
+        <result property = "password1" column = "pass_word1"/>
+    </resultMap>
+
+    <select id = "selectOneUser" parameterType = "com.plus.mybatis.perfect.model.User"
+            resultMap = "userResultMap">
+        select
+            <include refer = "userColumn"/>
+        from user where host = #{host, jdbcType=VARCHAR}
+    </select>
+
+    <sql id = "userColumn">
+        host, user, pass_word, address
+    </sql>
+
+</mapper>
